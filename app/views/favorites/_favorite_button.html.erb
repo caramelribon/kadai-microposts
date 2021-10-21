@@ -1,0 +1,12 @@
+<% if current_user.favorite?(micropost) %>
+  <%= link_to favorite_path(current_user.favorites.find_by(micropost_id: micropost.id)), method: :delete do %>
+  <i class="fas fa-heart"></i>
+  <% end %>
+    
+<% else %>
+  <%= link_to favorites_path(micropost_id: micropost.id), method: :post do %>
+  <i class ="far fa-heart"></i>
+  <% end %>
+<% end %>
+  
+  

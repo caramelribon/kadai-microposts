@@ -1,10 +1,13 @@
 <% unless current_user == user %>
+  <!-- もしuserをフォローしていたら-->
   <% if current_user.following?(user) %>
+    <!-- そのuserの下にアンフォローボタンをつける-->
     <%= form_with(model: current_user.relationships.find_by(follow_id: user.id), method: :delete) do |f| %>
       <%= hidden_field_tag :follow_id, user.id %>
       <%= f.submit 'Unfollow', class: 'btn btn-danger w-100' %>
     <% end %>
   <% else %>
+    <!-- もしuserをフォローしていなかったら、その下にフォローボタンをつける-->
     <%= form_with(model: current_user.relationships.build) do |f| %>
       <%= hidden_field_tag :follow_id, user.id %>
       <%= f.submit 'Follow', class: 'btn btn-primary w-100' %>
